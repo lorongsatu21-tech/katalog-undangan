@@ -1,0 +1,870 @@
+{
+  "settings": {
+    "storeName": "LORONGSATU21",
+    "tagline": "Fotokopi • Foto • ATK • Undangan Cetak",
+    "description": "Undangan cetak berkualitas dengan desain premium dan layanan lengkap dari konsep hingga finishing.",
+    "address": "Jl. Contoh No. 21, Indonesia",
+    "whatsapp": "6281234567890",
+    "phone": "081234567890",
+    "facebook": "https://facebook.com/lorongsatu21",
+    "instagram": "https://instagram.com/lorongsatu21",
+    "hours": "Senin–Sabtu 08.00–17.00",
+    "logoText": "LS21",
+    "primaryColor": "#1e3a5f",
+    "accentColor": "#c9a227",
+    "language": "id",
+    "catalog": {
+      "showPrice": true,
+      "showFavorite": true,
+      "showWhatsApp": true,
+      "showRelated": true,
+      "showViews": true
+    },
+    "payments": [
+      {
+        "id": "tf",
+        "name": "Transfer Bank",
+        "active": true
+      },
+      {
+        "id": "qris",
+        "name": "QRIS",
+        "active": true
+      },
+      {
+        "id": "cash",
+        "name": "Tunai / COD",
+        "active": true
+      }
+    ],
+    "bankAccounts": [
+      {
+        "bank": "BCA",
+        "number": "1234567890",
+        "name": "LORONGSATU21"
+      },
+      {
+        "bank": "BRI",
+        "number": "0987654321",
+        "name": "LORONGSATU21"
+      }
+    ],
+    "dpPercent": 50,
+    "minOrder": 100,
+    "pickupMethods": [
+      {
+        "id": "ambil",
+        "name": "Ambil di Toko",
+        "active": true
+      },
+      {
+        "id": "kirim",
+        "name": "Pengiriman",
+        "active": true
+      }
+    ],
+    "productionDays": 7,
+    "banners": [
+      {
+        "title": "Undangan Premium 2026",
+        "subtitle": "Desain eksklusif, cetak tajam, finishing mewah",
+        "cta": "Lihat Katalog"
+      },
+      {
+        "title": "Minimalis & Floral",
+        "subtitle": "Pilihan motif terbaru untuk hari istimewa Anda",
+        "cta": "Jelajahi"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "cat-sc",
+      "name": "Softcover",
+      "slug": "softcover",
+      "active": true,
+      "order": 1
+    },
+    {
+      "id": "cat-hc",
+      "name": "Hardcover",
+      "slug": "hardcover",
+      "active": true,
+      "order": 2
+    },
+    {
+      "id": "cat-l2",
+      "name": "Lipat 2",
+      "slug": "lipat-2",
+      "active": true,
+      "order": 3
+    },
+    {
+      "id": "cat-l3",
+      "name": "Lipat 3",
+      "slug": "lipat-3",
+      "active": true,
+      "order": 4
+    },
+    {
+      "id": "cat-amp",
+      "name": "Amplop",
+      "slug": "amplop",
+      "active": true,
+      "order": 5
+    },
+    {
+      "id": "cat-pre",
+      "name": "Premium",
+      "slug": "premium",
+      "active": true,
+      "order": 6
+    },
+    {
+      "id": "cat-min",
+      "name": "Minimalis",
+      "slug": "minimalis",
+      "active": true,
+      "order": 7
+    },
+    {
+      "id": "cat-flo",
+      "name": "Floral",
+      "slug": "floral",
+      "active": true,
+      "order": 8
+    },
+    {
+      "id": "cat-isl",
+      "name": "Islami",
+      "slug": "islami",
+      "active": true,
+      "order": 9
+    },
+    {
+      "id": "cat-adat",
+      "name": "Adat Nusantara",
+      "slug": "adat-nusantara",
+      "active": true,
+      "order": 10
+    },
+    {
+      "id": "cat-kor",
+      "name": "Korean Style",
+      "slug": "korean-style",
+      "active": true,
+      "order": 11
+    },
+    {
+      "id": "cat-lux",
+      "name": "Luxury",
+      "slug": "luxury",
+      "active": true,
+      "order": 12
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "code": "LS-U-0001",
+      "name": "Aurora Floral Softcover",
+      "categoryId": "cat-flo",
+      "subcategory": "Softcover",
+      "motif": "Floral",
+      "tags": [
+        "baru",
+        "terlaris"
+      ],
+      "description": "Undangan softcover dengan motif bunga aurora, kertas art carton 260gsm, cetak full color.",
+      "specs": {
+        "size": "16x16 cm",
+        "material": "Art Carton 260gsm",
+        "printType": "Offset Full Color",
+        "finishing": "Laminasi Doff",
+        "color": "Blush Pink",
+        "fold": "Lipat 2",
+        "envelope": "Ya, matching"
+      },
+      "prices": {
+        "100": 4500,
+        "300": 3800,
+        "500": 3200,
+        "1000": 2800
+      },
+      "extras": {
+        "designFee": 150000,
+        "envelope": 800,
+        "finishing": 300,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "BARU",
+        "TERLARIS"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#f3d1d8"
+        },
+        {
+          "type": "dalam",
+          "color": "#fff6f0"
+        },
+        {
+          "type": "belakang",
+          "color": "#e8c4c8"
+        },
+        {
+          "type": "detail",
+          "color": "#d4a5a5"
+        },
+        {
+          "type": "amplop",
+          "color": "#f7e4e6"
+        }
+      ],
+      "createdAt": "2026-08-01",
+      "views": 128,
+      "favorites": 18
+    },
+    {
+      "id": "p2",
+      "code": "LS-U-0002",
+      "name": "Nusantara Batik Hardcover",
+      "categoryId": "cat-adat",
+      "subcategory": "Hardcover",
+      "motif": "Batik",
+      "tags": [
+        "premium"
+      ],
+      "description": "Hardcover bermotif batik kawung dengan foil gold dan pita satin.",
+      "specs": {
+        "size": "15x21 cm",
+        "material": "Hardboard + Art Paper",
+        "printType": "Offset + Foil",
+        "finishing": "Hotstamp Gold",
+        "color": "Maroon Gold",
+        "fold": "Hardcover",
+        "envelope": "Ya"
+      },
+      "prices": {
+        "100": 9500,
+        "300": 8200,
+        "500": 7500,
+        "1000": 6800
+      },
+      "extras": {
+        "designFee": 250000,
+        "envelope": 1200,
+        "finishing": 800,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "PREMIUM"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#6b1d2a"
+        },
+        {
+          "type": "dalam",
+          "color": "#f5e6c8"
+        },
+        {
+          "type": "belakang",
+          "color": "#4a1420"
+        },
+        {
+          "type": "detail",
+          "color": "#c9a227"
+        },
+        {
+          "type": "amplop",
+          "color": "#8b2e3a"
+        }
+      ],
+      "createdAt": "2026-07-15",
+      "views": 96,
+      "favorites": 22
+    },
+    {
+      "id": "p3",
+      "code": "LS-U-0003",
+      "name": "Seoul Minimal White",
+      "categoryId": "cat-kor",
+      "subcategory": "Minimalis",
+      "motif": "Minimalis",
+      "tags": [
+        "baru"
+      ],
+      "description": "Gaya Korea modern, putih bersih dengan tipografi elegan dan ribbon cream.",
+      "specs": {
+        "size": "12x17 cm",
+        "material": "Conqueror 300gsm",
+        "printType": "Digital Premium",
+        "finishing": "Emboss Nama",
+        "color": "Ivory",
+        "fold": "Lipat 2",
+        "envelope": "Ya"
+      },
+      "prices": {
+        "100": 5200,
+        "300": 4400,
+        "500": 3900,
+        "1000": 3400
+      },
+      "extras": {
+        "designFee": 180000,
+        "envelope": 700,
+        "finishing": 400,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "BARU"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#f7f3ea"
+        },
+        {
+          "type": "dalam",
+          "color": "#ffffff"
+        },
+        {
+          "type": "belakang",
+          "color": "#efe8d8"
+        },
+        {
+          "type": "detail",
+          "color": "#d9cbb3"
+        }
+      ],
+      "createdAt": "2026-08-20",
+      "views": 74,
+      "favorites": 9
+    },
+    {
+      "id": "p4",
+      "code": "LS-U-0004",
+      "name": "Al-Fatihah Gold Frame",
+      "categoryId": "cat-isl",
+      "subcategory": "Premium",
+      "motif": "Kaligrafi",
+      "tags": [
+        "premium",
+        "islami"
+      ],
+      "description": "Bingkai kaligrafi gold dengan ayat pembuka, kertas textured premium.",
+      "specs": {
+        "size": "16x22 cm",
+        "material": "Jasmine 250gsm",
+        "printType": "Offset + Foil",
+        "finishing": "Gold Foil",
+        "color": "Cream Gold",
+        "fold": "Lipat 2",
+        "envelope": "Ya"
+      },
+      "prices": {
+        "100": 6200,
+        "300": 5400,
+        "500": 4800,
+        "1000": 4200
+      },
+      "extras": {
+        "designFee": 200000,
+        "envelope": 900,
+        "finishing": 500,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "PREMIUM"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#e8d5a3"
+        },
+        {
+          "type": "dalam",
+          "color": "#fffdf6"
+        },
+        {
+          "type": "belakang",
+          "color": "#d4c08a"
+        },
+        {
+          "type": "detail",
+          "color": "#c9a227"
+        },
+        {
+          "type": "amplop",
+          "color": "#efe0b8"
+        }
+      ],
+      "createdAt": "2026-06-10",
+      "views": 141,
+      "favorites": 31
+    },
+    {
+      "id": "p5",
+      "code": "LS-U-0005",
+      "name": "Garden Party Lipat 3",
+      "categoryId": "cat-l3",
+      "subcategory": "Lipat 3",
+      "motif": "Garden",
+      "tags": [
+        "hemat"
+      ],
+      "description": "Lipat 3 praktis dengan layout lengkap acara, RSVP, dan peta.",
+      "specs": {
+        "size": "10x21 cm (terbuka 30x21)",
+        "material": "Art Carton 230gsm",
+        "printType": "Offset",
+        "finishing": "Laminasi Glossy",
+        "color": "Sage Green",
+        "fold": "Lipat 3",
+        "envelope": "Opsional"
+      },
+      "prices": {
+        "100": 3800,
+        "300": 3100,
+        "500": 2700,
+        "1000": 2300
+      },
+      "extras": {
+        "designFee": 120000,
+        "envelope": 600,
+        "finishing": 200,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "HEMAT"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#c5d5c0"
+        },
+        {
+          "type": "dalam",
+          "color": "#f4f7f2"
+        },
+        {
+          "type": "belakang",
+          "color": "#a8c0a3"
+        },
+        {
+          "type": "detail",
+          "color": "#7a9a74"
+        }
+      ],
+      "createdAt": "2026-08-05",
+      "views": 55,
+      "favorites": 6
+    },
+    {
+      "id": "p6",
+      "code": "LS-U-0006",
+      "name": "Noir Luxury Velvet",
+      "categoryId": "cat-lux",
+      "subcategory": "Luxury",
+      "motif": "Luxury",
+      "tags": [
+        "premium"
+      ],
+      "description": "Kertas velvet hitam dengan foil rose gold dan box rigid opsional.",
+      "specs": {
+        "size": "15x15 cm",
+        "material": "Velvet Paper 300gsm",
+        "printType": "Foil + Spot UV",
+        "finishing": "Rose Gold Foil",
+        "color": "Black Rose Gold",
+        "fold": "Hardcover",
+        "envelope": "Box + Amplop"
+      },
+      "prices": {
+        "100": 14500,
+        "300": 12800,
+        "500": 11500,
+        "1000": 9900
+      },
+      "extras": {
+        "designFee": 350000,
+        "envelope": 2500,
+        "finishing": 1500,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "PREMIUM"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#1a1a1a"
+        },
+        {
+          "type": "dalam",
+          "color": "#2c2c2c"
+        },
+        {
+          "type": "belakang",
+          "color": "#111"
+        },
+        {
+          "type": "detail",
+          "color": "#b76e79"
+        },
+        {
+          "type": "amplop",
+          "color": "#2a2a2a"
+        }
+      ],
+      "createdAt": "2026-05-22",
+      "views": 210,
+      "favorites": 44
+    },
+    {
+      "id": "p7",
+      "code": "LS-U-0007",
+      "name": "Classic Soft Ivory",
+      "categoryId": "cat-sc",
+      "subcategory": "Softcover",
+      "motif": "Classic",
+      "tags": [
+        "terlaris"
+      ],
+      "description": "Desain klasik ivory dengan ornament tipis, cocok untuk segala tema.",
+      "specs": {
+        "size": "14x20 cm",
+        "material": "Art Carton 260gsm",
+        "printType": "Offset",
+        "finishing": "Laminasi Doff",
+        "color": "Ivory",
+        "fold": "Lipat 2",
+        "envelope": "Ya"
+      },
+      "prices": {
+        "100": 4000,
+        "300": 3400,
+        "500": 2900,
+        "1000": 2500
+      },
+      "extras": {
+        "designFee": 100000,
+        "envelope": 650,
+        "finishing": 250,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "TERLARIS",
+        "HEMAT"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#f3ead8"
+        },
+        {
+          "type": "dalam",
+          "color": "#fffaf0"
+        },
+        {
+          "type": "belakang",
+          "color": "#e6dcc6"
+        },
+        {
+          "type": "detail",
+          "color": "#cfc3a8"
+        },
+        {
+          "type": "amplop",
+          "color": "#efe6d4"
+        }
+      ],
+      "createdAt": "2026-04-12",
+      "views": 188,
+      "favorites": 27
+    },
+    {
+      "id": "p8",
+      "code": "LS-U-0008",
+      "name": "Sakura Blush Hardcover",
+      "categoryId": "cat-hc",
+      "subcategory": "Hardcover",
+      "motif": "Sakura",
+      "tags": [
+        "baru"
+      ],
+      "description": "Hardcover blush dengan ilustrasi sakura dan pita organza.",
+      "specs": {
+        "size": "16x16 cm",
+        "material": "Hardboard + Textured",
+        "printType": "Digital + Foil",
+        "finishing": "Spot UV",
+        "color": "Blush",
+        "fold": "Hardcover",
+        "envelope": "Ya"
+      },
+      "prices": {
+        "100": 8800,
+        "300": 7600,
+        "500": 6900,
+        "1000": 6100
+      },
+      "extras": {
+        "designFee": 220000,
+        "envelope": 1100,
+        "finishing": 600,
+        "custom": 0
+      },
+      "minOrder": 100,
+      "active": true,
+      "badges": [
+        "BARU"
+      ],
+      "photos": [
+        {
+          "type": "depan",
+          "color": "#f2c4c8"
+        },
+        {
+          "type": "dalam",
+          "color": "#fff5f6"
+        },
+        {
+          "type": "belakang",
+          "color": "#e8aeb4"
+        },
+        {
+          "type": "detail",
+          "color": "#d48a92"
+        },
+        {
+          "type": "amplop",
+          "color": "#f8dce0"
+        }
+      ],
+      "createdAt": "2026-08-28",
+      "views": 42,
+      "favorites": 5
+    }
+  ],
+  "orders": [
+    {
+      "id": "o1",
+      "number": "LS-INV-2026-0001",
+      "createdAt": "2026-09-01T09:00:00",
+      "customer": {
+        "name": "Andi Pratama",
+        "wa": "081211110001",
+        "address": "Jl. Melati 12, Denpasar"
+      },
+      "couple": {
+        "groom": "Andi Pratama",
+        "bride": "Sinta Dewi",
+        "date": "2026-11-21",
+        "location": "Ballroom Ayana"
+      },
+      "items": [
+        {
+          "productId": "p1",
+          "code": "LS-U-0001",
+          "name": "Aurora Floral Softcover",
+          "qty": 300,
+          "unitPrice": 3800,
+          "extras": {
+            "envelope": true,
+            "finishing": true,
+            "designFee": true
+          }
+        }
+      ],
+      "pickup": "ambil",
+      "payment": "tf",
+      "note": "Minta ribbon blush",
+      "totals": {
+        "subtotal": 1140000,
+        "extras": 480000,
+        "total": 1620000,
+        "paid": 810000
+      },
+      "paymentStatus": "dp",
+      "designStatus": "acc",
+      "productionStatus": "cetak",
+      "deadline": "2026-09-12",
+      "design": {
+        "previews": [
+          {
+            "date": "2026-09-02",
+            "note": "Draft 1"
+          }
+        ],
+        "revisions": [],
+        "accDate": "2026-09-03",
+        "accStatus": "acc"
+      }
+    },
+    {
+      "id": "o2",
+      "number": "LS-INV-2026-0002",
+      "createdAt": "2026-09-04T14:20:00",
+      "customer": {
+        "name": "Budi Santoso",
+        "wa": "081222220002",
+        "address": "Jl. Kenanga 5, Gianyar"
+      },
+      "couple": {
+        "groom": "Budi Santoso",
+        "bride": "Laila Putri",
+        "date": "2026-12-05",
+        "location": "Villa Ubud"
+      },
+      "items": [
+        {
+          "productId": "p4",
+          "code": "LS-U-0004",
+          "name": "Al-Fatihah Gold Frame",
+          "qty": 500,
+          "unitPrice": 4800,
+          "extras": {
+            "envelope": true,
+            "finishing": false,
+            "designFee": true
+          }
+        }
+      ],
+      "pickup": "kirim",
+      "payment": "qris",
+      "note": "",
+      "totals": {
+        "subtotal": 2400000,
+        "extras": 650000,
+        "total": 3050000,
+        "paid": 0
+      },
+      "paymentStatus": "unpaid",
+      "designStatus": "preview",
+      "productionStatus": "desain",
+      "deadline": "2026-09-18",
+      "design": {
+        "previews": [
+          {
+            "date": "2026-09-06",
+            "note": "Preview awal"
+          }
+        ],
+        "revisions": [],
+        "accDate": null,
+        "accStatus": "waiting"
+      }
+    },
+    {
+      "id": "o3",
+      "number": "LS-INV-2026-0003",
+      "createdAt": "2026-09-06T11:00:00",
+      "customer": {
+        "name": "Citra Lestari",
+        "wa": "081233330003",
+        "address": "Jl. Mawar 8, Badung"
+      },
+      "couple": {
+        "groom": "Rama Wijaya",
+        "bride": "Citra Lestari",
+        "date": "2026-10-17",
+        "location": "Gedung Graha"
+      },
+      "items": [
+        {
+          "productId": "p6",
+          "code": "LS-U-0006",
+          "name": "Noir Luxury Velvet",
+          "qty": 100,
+          "unitPrice": 14500,
+          "extras": {
+            "envelope": true,
+            "finishing": true,
+            "designFee": true
+          }
+        }
+      ],
+      "pickup": "ambil",
+      "payment": "tf",
+      "note": "Box rigid hitam",
+      "totals": {
+        "subtotal": 1450000,
+        "extras": 750000,
+        "total": 2200000,
+        "paid": 0
+      },
+      "paymentStatus": "unpaid",
+      "designStatus": "baru",
+      "productionStatus": "baru",
+      "deadline": "2026-09-20",
+      "design": {
+        "previews": [],
+        "revisions": [],
+        "accDate": null,
+        "accStatus": "none"
+      }
+    }
+  ],
+  "customers": [
+    {
+      "id": "c1",
+      "name": "Andi Pratama",
+      "wa": "081211110001",
+      "address": "Jl. Melati 12, Denpasar",
+      "orders": 1,
+      "total": 1620000,
+      "lastOrder": "LS-INV-2026-0001"
+    },
+    {
+      "id": "c2",
+      "name": "Budi Santoso",
+      "wa": "081222220002",
+      "address": "Jl. Kenanga 5, Gianyar",
+      "orders": 1,
+      "total": 3050000,
+      "lastOrder": "LS-INV-2026-0002"
+    },
+    {
+      "id": "c3",
+      "name": "Citra Lestari",
+      "wa": "081233330003",
+      "address": "Jl. Mawar 8, Badung",
+      "orders": 1,
+      "total": 2200000,
+      "lastOrder": "LS-INV-2026-0003"
+    }
+  ],
+  "analytics": {
+    "views": {},
+    "productViews": {},
+    "waClicks": 14,
+    "visits": 86,
+    "devices": {},
+    "sources": {
+      "direct": 0
+    }
+  },
+  "counters": {
+    "product": 8,
+    "order": 3
+  }
+}
