@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LORONGSATU21 — Katalog Undangan Cetak</title>
+  <meta name="theme-color" content="#1e3a5f" />
+  <meta name="description" content="Katalog dan pemesanan undangan cetak LORONGSATU21" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon.svg" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div id="customer-app" class="app-customer">
+    <header class="topbar">
+      <div class="logo" onclick="go('home')">
+        <div class="logo-mark">LS21</div>
+        <span id="store-name">LORONGSATU21</span>
+      </div>
+      <div class="search"><input id="q-home" placeholder="Cari undangan, kode, motif..." /></div>
+      <button class="icon-btn" onclick="go('cart')" title="Keranjang">🛒 <span id="cart-count"></span></button>
+      <button class="icon-btn" onclick="showAdmin(true)" title="Admin">⚙</button>
+    </header>
 
+    <section id="page-home" class="page on">
+      <div class="hero" id="hero"></div>
+      <div class="section"><h2>Kategori populer</h2><div class="chips" id="pop-cats"></div></div>
+      <div class="section"><h2>Model terbaru</h2><div class="grid" id="grid-new"></div></div>
+      <div class="section"><h2>Produk populer</h2><div class="grid" id="grid-pop"></div></div>
+      <div class="section"><h2>Produk premium</h2><div class="grid" id="grid-pre"></div></div>
+    </section>
+
+    <section id="page-katalog" class="page">
+      <div class="section">
+        <h2>Katalog</h2>
+        <div class="filters">
+          <select id="filter-cat" onchange="view.filters.categoryId=this.value;renderKatalog()"></select>
+          <select id="filter-motif" onchange="view.filters.motif=this.value;renderKatalog()"></select>
+          <select id="filter-color" onchange="view.filters.color=this.value;renderKatalog()"></select>
+          <select id="filter-size" onchange="view.filters.size=this.value;renderKatalog()"></select>
+          <select id="filter-fold" onchange="view.filters.fold=this.value;renderKatalog()"></select>
+          <select id="filter-mat" onchange="view.filters.mat=this.value;renderKatalog()"></select>
+          <input type="number" placeholder="Harga min" onchange="view.filters.minp=this.value;renderKatalog()">
+          <input type="number" placeholder="Harga max" onchange="view.filters.maxp=this.value;renderKatalog()">
+        </div>
+        <div class="grid" id="grid-kat"></div>
+      </div>
+    </section>
+
+    <section id="page-favorit" class="page">
+      <div class="section"><h2>Favorit</h2><div class="grid" id="grid-fav"></div></div>
+    </section>
+
+    <section id="page-pesanan" class="page">
+      <div class="section"><h2>Pesanan saya</h2>
+        <p class="muted">Masukkan nomor pesanan atau pilih dari daftar di perangkat ini.</p>
+        <div class="form card">
+          <input id="find-ord" placeholder="LS-INV-2026-0001">
+          <button class="btn btn-primary" onclick="view.orderId=$('#find-ord').value;view.page='track';renderCustomer()">Lacak</button>
+        </div>
+        <div id="order-list"></div>
+      </div>
+    </section>
+
+    <section id="page-detail" class="page"><div class="detail">
+      <button class="btn btn-ghost" onclick="go('katalog')">← Katalog</button>
+      <div class="gallery" id="d-gallery"></div>
+      <div id="d-info"></div>
+    </div></section>
+
+    <section id="page-cart" class="page"><div class="section"><h2>Keranjang</h2><div id="cart-box"></div></div></section>
+    <section id="page-checkout" class="page"><div class="section"><h2>Checkout</h2><div class="card form" id="co-form"></div></div></section>
+    <section id="page-track" class="page"><div class="section"><button class="btn btn-ghost" onclick="go('pesanan')">← Pesanan</button><div id="track-box"></div></div></section>
+    <section id="page-compare" class="page"><div class="section"><h2>Bandingkan</h2><div id="compare-box"></div></div></section>
+
+    <div id="compare-bar" class="compare-bar hide"></div>
+    <nav class="navb">
+      <a data-page="home" onclick="go('home')">Beranda</a>
+      <a data-page="katalog" onclick="go('katalog')">Katalog</a>
+      <a data-page="favorit" onclick="go('favorit')">Favorit</a>
+      <a data-page="pesanan" onclick="go('pesanan')">Pesanan</a>
+    </nav>
+  </div>
+
+  <div id="admin-app" class="admin" style="display:none">
+    <div id="admin-login" class="login-gate">
+      <h2>Admin LORONGSATU21</h2>
+      <p class="muted">Prototype: admin / lorongsatu21</p>
+      <div class="form">
+        <label>Username</label><input id="adm-user" value="admin">
+        <label>Password</label><input id="adm-pass" type="password" value="lorongsatu21">
+        <button class="btn btn-primary" style="margin-top:12px;width:100%" onclick="loginAdmin()">Masuk</button>
+        <button class="btn btn-ghost" style="margin-top:8px;width:100%" onclick="showAdmin(false)">Kembali ke katalog</button>
+      </div>
+    </div>
+    <div id="admin-main" class="hide" style="display:contents">
+      <aside class="sidebar">
+        <h1>LS21 ADMIN</h1>
+        <a data-ap="dashboard" onclick="adminGo('dashboard')">Dashboard</a>
+        <a data-ap="produk" onclick="adminGo('produk')">Produk</a>
+        <a data-ap="kategori" onclick="adminGo('kategori')">Kategori</a>
+        <a data-ap="pesanan" onclick="adminGo('pesanan')">Pesanan</a>
+        <a data-ap="desain" onclick="adminGo('desain')">Desain / ACC</a>
+        <a data-ap="pelanggan" onclick="adminGo('pelanggan')">Pelanggan</a>
+        <a data-ap="laporan" onclick="adminGo('laporan')">Laporan</a>
+        <a data-ap="pengaturan" onclick="adminGo('pengaturan')">Pengaturan</a>
+        <a onclick="showAdmin(false)">Lihat Katalog</a>
+        <a onclick="logoutAdmin()">Keluar</a>
+      </aside>
+      <div class="aside">
+        <div class="atop"><strong>Panel Admin</strong><span class="muted">Desktop management</span></div>
+        <div class="acontent" id="admin-content"></div>
+      </div>
+    </div>
+  </div>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+  </script>
+</body>
+</html>
