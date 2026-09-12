@@ -2,6 +2,16 @@ const LS21 = (() => {
   const LOCAL_KEY = 'lorongsatu21_device_v2';
   const TOKEN_KEY = 'lorongsatu21_token';
   const API = '';
+  const sb = () => window.LS21_SUPABASE || {};
+  const useSB = () => !!(sb().url && sb().anonKey);
+
+  function sbHeaders(extra) {
+    return Object.assign({
+      apikey: sb().anonKey,
+      Authorization: 'Bearer ' + sb().anonKey,
+      'Content-Type': 'application/json'
+    }, extra || {});
+  }
 
   let db = {
     settings: { storeName: 'LORONGSATU21', tagline: '', catalog: { showPrice: true, showFavorite: true, showWhatsApp: true }, payments: [], pickupMethods: [], banners: [{}], productionDays: 7, whatsapp: '' },
@@ -31,16 +41,43 @@ const LS21 = (() => {
   function token() { return localStorage.getItem(TOKEN_KEY) || ''; }
 
   async function pull() {
-    const r = await fetch(API + '/api/db');
-    if (!r.ok) throw new Error('Gagal memuat data server');
-    const remote = await r.json();
+    let remote;
+    if (useSB()) {
+      const r = await fetch(sb().url.replace(/\/$/, '') + '/rest/v1/ls21_store?id=eq.1&select=data', { headers: sbHeaders() });
+      if (!r.ok) throw new Error('Gagal memuat Supabase');
+      const rows = await r.json();
+      remote = (rows[0] && rows[0].data) || {};
+      if (!remote.products) {
+        const seed = await fetch(API + '/api/db').catch(() => null);
+        if (seed && seed.ok) {
+          remote = await seed.json();
+          await pushSupabase(remote);
+        }
+      }
+    } else {
+      const r = await fetch(API + '/api/db');
+      if (!r.ok) throw new Error('Gagal memuat data server');
+      remote = await r.json();
+    }
     db.products = remote.products || [];
     db.categories = remote.categories || [];
     db.orders = remote.orders || [];
     db.customers = remote.customers || [];
-    db.settings = remote.settings;
+    db.settings = remote.settings || db.settings;
     db.analytics = remote.analytics || db.analytics;
     db.counters = remote.counters || db.counters;
+  }
+
+  async function pushSupabase(payload) {
+    const body = payload || {
+      products: db.products, categories: db.categories, orders: db.orders,
+      customers: db.customers, settings: db.settings, analytics: db.analytics, counters: db.counters
+    };
+    await fetch(sb().url.replace(/\/$/, '') + '/rest/v1/ls21_store?id=eq.1', {
+      method: 'PATCH',
+      headers: sbHeaders({ Prefer: 'return=minimal' }),
+      body: JSON.stringify({ data: body, updated_at: new Date().toISOString() })
+    });
   }
 
   let pushTimer;
@@ -50,14 +87,19 @@ const LS21 = (() => {
   }
 
   async function pushAdmin() {
+    const payload = {
+      products: db.products, categories: db.categories, orders: db.orders,
+      customers: db.customers, settings: db.settings, analytics: db.analytics, counters: db.counters
+    };
+    if (useSB()) {
+      await pushSupabase(payload);
+      return;
+    }
     if (!token()) return;
     await fetch(API + '/api/db', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token() },
-      body: JSON.stringify({
-        products: db.products, categories: db.categories, orders: db.orders,
-        customers: db.customers, settings: db.settings, analytics: db.analytics, counters: db.counters
-      })
+      body: JSON.stringify(payload)
     });
   }
 
@@ -73,6 +115,14 @@ const LS21 = (() => {
       await pull();
     },
     async login(user, pass) {
+      if (useSB()) {
+        if (user === (sb().adminUser || 'admin') && pass === (sb().adminPass || 'lorongsatu21')) {
+          localStorage.setItem(TOKEN_KEY, 'sb-admin');
+          db.session.adminAuthed = true;
+          return true;
+        }
+        return false;
+      }
       const r = await fetch(API + '/api/login', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user, pass })
@@ -157,6 +207,7 @@ const LS21 = (() => {
         const i = db.orders.findIndex(x => x.id === o.id);
         const isNew = i < 0;
         if (isNew) db.orders.unshift(o); else db.orders[i] = o;
+        if (useSB()) { pushSoon(); return; }
         if (isNew) {
           fetch(API + '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(o) })
             .then(() => pull());
