@@ -21,9 +21,14 @@ function extrasTotal(p, qty, extras){
   return t;
 }
 
+function photoStyle(ph){
+  ph = ph || {color:'#1e3a5f'};
+  if (ph.url) return `background:#f3f0ea url('${ph.url}') center/cover no-repeat`;
+  return `background:linear-gradient(160deg,${ph.color||'#1e3a5f'},#1e3a5f)`;
+}
 function photoBlock(p, type, extra=''){
   const ph = (p.photos||[]).find(x=>x.type===type) || (p.photos||[])[0] || {color:'#1e3a5f'};
-  return `<div class="${extra}" style="background:linear-gradient(145deg,${ph.color},${shade(ph.color)})">${type.toUpperCase()} · ${p.code}</div>`;
+  return `<div class="${extra}" style="${photoStyle(ph)}">${ph.url?'': (type.toUpperCase()+' · '+p.code)}</div>`;
 }
 function shade(hex){
   return hex;
@@ -34,7 +39,7 @@ function productCard(p){
   const badges = (p.badges||[]).map(b=>`<span class="badge ${b.toLowerCase()}">${b}</span>`).join('');
   const showPrice = LS21.settings.get().catalog.showPrice;
   return `<article class="pcard" onclick="openProduct('${p.id}')">
-    <div class="pphoto" style="background:linear-gradient(160deg,${ph.color},#1e3a5f)">
+    <div class="pphoto" style="${photoStyle(ph)}">
       <span class="code">${p.code}</span>
       <div class="badges">${badges}</div>
     </div>
@@ -129,8 +134,11 @@ function renderDetail(){
   const photos = p.photos||[];
   const cur = photos[view.photo]||photos[0];
   $('#d-gallery').innerHTML = `
-    <div class="gmain" style="background:linear-gradient(145deg,${cur.color},#1e3a5f)">${(cur.type||'depan').toUpperCase()}<br>${p.name}</div>
-    <div class="gth">${photos.map((ph,i)=>`<div onclick="view.photo=${i};renderDetail()" style="background:${ph.color}">${ph.type}</div>`).join('')}</div>`;
+    <div class="gmain" style="${photoStyle(cur)}">${cur&&cur.url?'':((cur.type||'depan').toUpperCase()+'<br>'+p.name)}</div>
+    <div class="gth">${photos.map((ph,i)=>`<div onclick="view.photo=${i};renderDetail()" style="${photoStyle(ph)}">${ph.url?'':ph.type}</div>`).join('')}</div>
+    ${LS21.session.adminAuthed?`<label class="btn btn-primary" style="margin-top:8px;display:inline-block">Ganti gambar
+      <input type="file" accept="image/*" hidden onchange="changeDetailPhoto(this)">
+    </label>`:''}`;
   $('#d-info').innerHTML = `
     <div class="meta">${p.code} · ${catName(p.categoryId)}</div>
     <h2 style="margin:6px 0">${p.name}</h2>
@@ -467,9 +475,10 @@ function editProduct(id){
       <label>Biaya desain</label><input type="number" id="pf-xd" value="${p.extras.designFee||0}">
       <label>Amplop /pcs</label><input type="number" id="pf-xe" value="${p.extras.envelope||0}">
       <label>Finishing /pcs</label><input type="number" id="pf-xf" value="${p.extras.finishing||0}">
-      <h4>Foto (warna placeholder + tipe)</h4>
-      <textarea id="pf-ph">${(p.photos||[]).map(x=>x.type+','+x.color).join('\n')}</textarea>
-      <p class="muted">Format per baris: tipe,#hex  contoh: depan,#f3d1d8</p>
+      <h4>Gambar desain</h4>
+      <div id="pf-photos">${photoEditorHtml(p.photos||[])}</div>
+      <button type="button" class="btn btn-ghost" onclick="addPhotoSlot()">+ Tambah sisi</button>
+      <p class="muted">Klik <b>Ganti gambar</b> pada pratinjau, pilih file JPG/PNG/SVG dari HP atau komputer. Lalu Simpan.</p>
       <div class="row-actions">
         <button class="btn btn-primary" onclick="saveProduct('${p.id}')">Simpan</button>
         <button class="btn btn-ghost" onclick="$('#prod-form').innerHTML=''">Batal</button>
@@ -477,7 +486,7 @@ function editProduct(id){
     </div>
     <div>
       <h4>Preview</h4>
-      <div class="preview-box" id="pf-prev" style="background:${(p.photos[0]||{}).color||'#eee'}">
+      <div class="preview-box" id="pf-prev" style="${photoStyle((p.photos||[])[0])}">
         <b>${p.code}</b><div>${p.name||'Nama produk'}</div>
         <div class="muted">${fmt(p.prices[100]||0)} /pcs</div>
       </div>
@@ -494,8 +503,75 @@ function saveProduct(id){
   p.prices={}; QTYS.forEach(q=>p.prices[q]=Number($('#pf-pr-'+q).value||0));
   p.minOrder=Number($('#pf-min').value||100);
   p.extras={ designFee:Number($('#pf-xd').value||0), envelope:Number($('#pf-xe').value||0), finishing:Number($('#pf-xf').value||0), custom:0 };
-  p.photos=$('#pf-ph').value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const [type,color]=l.split(','); return {type:type.trim(), color:(color||'#ccc').trim()};});
+  p.photos = (window._editP && window._editP.photos) ? window._editP.photos : [];
   LS21.products.save(p); toast('Produk disimpan'); rendProduk();
+}
+
+function photoEditorHtml(photos){
+  if(!photos.length) photos=[{type:'depan',color:'#c9a227'}];
+  return photos.map((ph,i)=>`
+    <div class="card" style="padding:10px;margin:8px 0">
+      <div class="gmain" style="height:180px;${photoStyle(ph)}"></div>
+      <label>Sisi</label>
+      <input value="${ph.type||''}" onchange="window._editP.photos[${i}].type=this.value">
+      <div class="row-actions">
+        <label class="btn btn-primary" style="display:inline-block">Ganti gambar
+          <input type="file" accept="image/*" hidden onchange="changePhotoFile(${i},this)">
+        </label>
+        <button type="button" class="btn btn-ghost" onclick="removePhotoSlot(${i})">Hapus sisi</button>
+      </div>
+    </div>`).join('');
+}
+function refreshPhotoEditor(){
+  const box=$('#pf-photos'); if(!box||!window._editP) return;
+  box.innerHTML=photoEditorHtml(window._editP.photos||[]);
+  const prev=$('#pf-prev'); if(prev) prev.style.cssText=photoStyle((window._editP.photos||[])[0]);
+}
+function addPhotoSlot(){
+  if(!window._editP) return;
+  window._editP.photos=window._editP.photos||[];
+  window._editP.photos.push({type:'sisi',color:'#c9a227'});
+  refreshPhotoEditor();
+}
+function removePhotoSlot(i){
+  window._editP.photos.splice(i,1);
+  if(!window._editP.photos.length) window._editP.photos=[{type:'depan',color:'#c9a227'}];
+  refreshPhotoEditor();
+}
+function changeDetailPhoto(input){
+  const p=LS21.products.get(view.productId); if(!p) return;
+  window._editP=structuredClone(p);
+  const i=view.photo||0;
+  if(!window._editP.photos[i]) window._editP.photos[i]={type:'depan',color:'#c9a227'};
+  changePhotoFile(i,input);
+  setTimeout(()=>{
+    p.photos=window._editP.photos;
+    LS21.products.save(p);
+    renderDetail();
+  },400);
+}
+function changePhotoFile(i, input){
+  const file=input.files&&input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const apply=(url)=>{
+      window._editP.photos[i].url=url;
+      window._editP.photos[i].color=window._editP.photos[i].color||'#c9a227';
+      refreshPhotoEditor();
+      toast('Gambar diganti. Klik Simpan.');
+    };
+    if(file.type==='image/svg+xml' || file.size<180000){ apply(reader.result); return; }
+    const img=new Image();
+    img.onload=()=>{
+      const max=900, scale=Math.min(1, max/Math.max(img.width,img.height));
+      const c=document.createElement('canvas');
+      c.width=Math.round(img.width*scale); c.height=Math.round(img.height*scale);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      apply(c.toDataURL('image/jpeg',0.72));
+    };
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
 }
 
 function rendKat(){
